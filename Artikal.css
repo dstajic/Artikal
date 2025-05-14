@@ -1,0 +1,52 @@
+body {
+  margin: 50px;
+}
+
+table {
+  border-collapse: collapse;
+  text-align: center;
+}
+table td {
+  padding: 0;
+  border: 2px solid black;
+}
+table td {
+  padding: 10px;
+}
+table thead {
+  background-color: #f5f5f5;
+}
+table .drugi {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#Tabela {
+  display: flex;
+  gap: 20px; /* Optional spacing between table and form */
+  margin: 50px;
+  height: 160px;
+  align-items: flex-start; /* Align top edges */
+}
+
+form {
+  border: 1px solid black;
+  padding-left: 10px;
+  padding-top: 5px;
+  height: 160px;
+  width: 210px;
+  font-size: 15px;
+}
+
+#submit {
+  float: right;
+  margin-right: 20px;
+  border: 1px solid black;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+/*# sourceMappingURL=Artikal.css.map */
