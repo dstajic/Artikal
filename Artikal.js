@@ -41,11 +41,16 @@ for(let i=0;i<Artikli.length;i++)
 }
 
 function initializeArtikli() {
-    let Artikli = [
+    let Artikli = [];
+    const sacuvaniArtikli = localStorage.getItem("Artikli");
+    if (sacuvaniArtikli) {
+        Artikli = JSON.parse(sacuvaniArtikli);
+    }
+    /*let Artikli = [
       new Artikal("Kafa", 100, "Kafa od kafe"),
       new Artikal("Mleko", 120, "Mleko od mleka"),
       new Artikal("Jaja", 150, "Jaja od jaja")
-    ];
+    ];*/
     
     createArticleRows(Artikli);
     handleFormSubmission(Artikli);
@@ -89,10 +94,14 @@ function handleFormSubmission(Artikli) {
           alert("Vec postoji artikal sa ovim nazivom")
           return;
         }
+        
+        
       }
-      Artikli.push(novArtikal)
-
-      createArticleRows(Artikli)
+      
+            Artikli.push(novArtikal)
+            localStorage.setItem("Artikli", JSON.stringify(Artikli));
+            createArticleRows(Artikli)
+      
   });
 }
 
