@@ -1,25 +1,19 @@
 class Artikal {
-    constructor( naziv, cena, opis, broj) {
+    constructor( naziv, cena, opis) {
         this.naziv = naziv;
         this.cena = cena;
         this.opis = opis;
-        this.broj = broj
+       
     }
 }
 
-let Kafa= new Artikal("Kafa", 100, "Kafa od kafe",1);
-let Mleko = new Artikal("Mleko", 120, "Mleko od mleka",2);
-let Jaja = new Artikal("Jaja", 150, "Jaja od jaja",3);
-
-let Artikli = [Kafa, Mleko, Jaja];
-
-
-let tabela = document.querySelector("#Artikli");
-for(let artikal of Artikli)
-
+function createArticleRows(Artikli)
 {
-    let tr = document.createElement("tr"); 
-    
+for(let i=0;i<Artikli.length;i++)
+{
+    let tabela = document.querySelector("#Artikli");
+    let tr = document.createElement("tr"); ;
+
     let broj= document.createElement("td");
     let naziv = document.createElement("td");
     let cena = document.createElement("td");
@@ -28,13 +22,49 @@ for(let artikal of Artikli)
     naziv.style.border="1px solid black";
     cena.style.border="1px solid black";
 
-    broj.textContent = artikal.broj;
-    naziv.textContent = artikal.naziv;
-    cena.textContent = artikal.cena;
+    broj.textContent = i+1;
+    naziv.textContent = Artikli[i].naziv;
+    cena.textContent = Artikli[i].cena;
 
     tr.appendChild(broj);
     tr.appendChild(naziv);
     tr.appendChild(cena);
 
+    tr.addEventListener("click", function() {
+        prikaziDetalje(Artikli[i]);
+      });
     tabela.appendChild(tr);
 }
+}
+
+function initializeArtikli() {
+    let Artikli = [
+      new Artikal("Kafa", 100, "Kafa od kafe"),
+      new Artikal("Mleko", 120, "Mleko od mleka"),
+      new Artikal("Jaja", 150, "Jaja od jaja")
+    ];
+    createArticleRows(Artikli);
+}
+
+function prikaziDetalje(artikal) {
+    let detaljiDiv = document.querySelector("#detalji");
+    detaljiDiv.innerHTML = "";
+
+    let pNaziv = document.createElement("p");
+    pNaziv.textContent = "Naziv: " + artikal.naziv;
+
+    let pCena = document.createElement("p");
+    pCena.textContent = "Cena: " + artikal.cena + " RSD";
+
+    let pOpis = document.createElement("p");
+    pOpis.textContent = "Opis: " + artikal.opis;
+
+    detaljiDiv.appendChild(pNaziv);
+    detaljiDiv.appendChild(pCena);
+    detaljiDiv.appendChild(pOpis);
+    
+    detaljiDiv.style.display = "block";
+}
+
+
+initializeArtikli();
