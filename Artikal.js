@@ -9,9 +9,12 @@ class Artikal {
 
 function createArticleRows(Artikli)
 {
+    let tabela = document.querySelector("#Artikli");
+    tabela.innerHTML = "";
 for(let i=0;i<Artikli.length;i++)
 {
-    let tabela = document.querySelector("#Artikli");
+    
+    
     let tr = document.createElement("tr"); ;
 
     let broj= document.createElement("td");
@@ -43,7 +46,9 @@ function initializeArtikli() {
       new Artikal("Mleko", 120, "Mleko od mleka"),
       new Artikal("Jaja", 150, "Jaja od jaja")
     ];
+    
     createArticleRows(Artikli);
+    handleFormSubmission(Artikli);
 }
 
 function prikaziDetalje(artikal) {
@@ -62,9 +67,33 @@ function prikaziDetalje(artikal) {
     detaljiDiv.appendChild(pNaziv);
     detaljiDiv.appendChild(pCena);
     detaljiDiv.appendChild(pOpis);
-    
+
     detaljiDiv.style.display = "block";
 }
 
+function handleFormSubmission(Artikli) {
+  let submitBtn = document.querySelector('#submit')
+  submitBtn.addEventListener('click', function() {
+      const forma = document.querySelector('#form')
+      const formData = new FormData(forma)
+
+     let naziv=formData.get('Naziv');
+     let cena=formData.get('Cena');
+     let opis=formData.get('Opis');
+
+      const novArtikal = new Artikal(naziv, cena, opis)
+      for(let i=0;i<Artikli.length;i++)
+      {
+        if(Artikli[i].naziv===naziv)
+        {
+          alert("Vec postoji artikal sa ovim nazivom")
+          return;
+        }
+      }
+      Artikli.push(novArtikal)
+
+      createArticleRows(Artikli)
+  });
+}
 
 initializeArtikli();
